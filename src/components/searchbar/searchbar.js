@@ -1,10 +1,10 @@
 import React from "react";
 import { Component } from "react";
 import toast from 'react-hot-toast';
+import {Header, Form, Input, Button} from './searchbar.styled'
 
 export class Searchbar extends Component {
-
-
+  
 
   handleSubmit = event => {
     event.preventDefault();
@@ -19,22 +19,20 @@ export class Searchbar extends Component {
 
 render() {
   return(
-    <header className="searchbar">
-<form className="form" onSubmit={this.handleSubmit}>
-<button type="submit" className="button">
-  <span className="button-label">Search</span>
-</button>
+    <Header>
+<Form onSubmit={this.handleSubmit}>
+<Button type="submit">Search
+</Button>
 
-<input
-  className="input"
+<Input
   type="text"
   name="query"
   autoComplete="off"
   autoFocus
   placeholder="Search images and photos"
 />
-</form>
-</header>
+</Form>
+</Header>
 );
 };
 };

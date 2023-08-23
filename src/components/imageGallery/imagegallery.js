@@ -1,11 +1,12 @@
 import React from "react";
 
 import {ImageGalleryItem} from "./imageGalleryItem/imagegalleryitem";
+import { Gallery } from "./imagegallery.styled";
 
 
 export const ImageGallery = ({ images }) => {
     return (
-        <ul className="gallery">
+        <Gallery>
             {images.map((image) => (
                 <ImageGalleryItem
                     key={image.id}
@@ -15,6 +16,6 @@ export const ImageGallery = ({ images }) => {
                     description={image.tags}
                 />
             ))}
-        </ul>
+        </Gallery>
     );
 };

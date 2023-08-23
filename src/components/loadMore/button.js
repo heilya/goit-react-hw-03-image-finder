@@ -1,10 +1,10 @@
 import React from "react";
-
+import {ButtonLoad, Container} from './button.styled'
 
 export const Button =({onClick}) => {
     return (
-        <div>
-            <button type ="button" onClick={onClick}>Load more</button>
-        </div>
+        <Container>
+            <ButtonLoad type ="button" onClick={onClick}>Load more</ButtonLoad>
+        </Container>
     );
 };
