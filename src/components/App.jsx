@@ -1,10 +1,11 @@
 import { Component } from "react";
+import axios from "axios";
 import {Searchbar} from "./searchbar/searchbar";
 import {ImageGallery} from "./imageGallery/imagegallery";
 import {Loader} from "./loader/loader";
 import {Button} from "./loadMore/button";
-import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
+
 
 
 
@@ -23,12 +24,13 @@ export class App extends Component{
     this.setState({query:`${Date.now()}/${newQuery}`,images:[],page:1});
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) {
+    const {query, page} = this.state
     const API_KEY = '38219577-d029f76c48d8fd975b70c05f3';
     const BASE_URL = 'https://pixabay.com/api/';
     
-    if (prevState.query !== this.state.query || prevState.page !== this.state.page) {
-      this.setState({ loading: true }); 
+    if (prevState.query !== query || prevState.page !== page) {
+      this.setState({ loading: true });
       const searchImages = async (query, page) => {
         const newQuery = query.split("/")[1];
         try {
@@ -39,8 +41,10 @@ export class App extends Component{
           throw error;
         }
       };
+
+
       
-      searchImages(this.state.query, this.state.page)
+      searchImages(query, page)
         .then((newImages) => {
           if (newImages.length === 0) {
             toast.error('Nothing found, try something else');
@@ -60,19 +64,21 @@ export class App extends Component{
   
 
   handleLoadMore = () =>{
-    this.setState(prevState => ({page: prevState.page + 1}));
+    const {page} = this.state;
+    this.setState({page: page + 1});
   };
 
 
   render(){
-    const { images,loading } = this.state;
+    const {loading, images} = this.state;
     return(
       <div>
         <Searchbar onSumbit={this.handleSubmitForm}/>
-        {loading?(<Loader/>):(<ImageGallery images={this.state.images}/>)}
+        <ImageGallery images={this.state.images}/>
         {images.length !== 0 && (
           <Button onClick={this.handleLoadMore} />
-        )}
+          )}
+          {loading && <Loader/>}
         <Toaster />
       </div>
     );
