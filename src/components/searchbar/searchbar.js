@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import toast from 'react-hot-toast';
 
 export class Searchbar extends Component {
 
@@ -8,7 +9,7 @@ export class Searchbar extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (event.target.elements.query.value.trim() === "") {
-      alert("Please enter a search term!");
+      toast.error('Please enter a search term!');
       return;
     }
     const newQuery = event.target.elements.query.value;

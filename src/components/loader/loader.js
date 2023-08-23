@@ -1,11 +1,9 @@
-import React from "react";
-
-
+import { RotatingLines } from 'react-loader-spinner';
 
 export const Loader = () => {
-    return (
-        <div className="loader">
-            <p>Loading...</p>
-        </div>
-    );
+  return (
+    <div>
+      <RotatingLines />
+    </div>
+  );
 };
